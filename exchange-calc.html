@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        margin: 0;
+        background-color: rgb(57, 196, 196);
+        min-height: 100vh;
+      }
+
+      h1 {
+        font-size: 30px;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .header {
+        text-align: center;
+      }
+
+      .wrapper {
+        background-color: gray;
+        width: 500px;
+        padding: 30px;
+        border-radius: 10px;
+        border: 3px solid black;
+      }
+
+      .exchange {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 15px;
+        padding: 10px 15px;
+      }
+
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 15px;
+        padding: 8px 15px;
+      }
+
+      .mb {
+        margin-bottom: 20px;
+      }
+
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        padding: 8px 15px;
+
+        border-radius: 10px;
+      }
+
+      #calc {
+        border: 3px solid black;
+        border-radius: 10px;
+      }
+
+      #recalc {
+        border: 3px solid black;
+        border-radius: 10px;
+      }
+
+      #clear {
+        border: 2px solid black;
+        border-radius: 10px;
+        background-color: red;
+      }
+
+      #store {
+        border: 2px solid black;
+        border-radius: 10px;
+        background-color: green;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <h1>Money Exchange calculator</h1>
+      <div class="exchange">
+        <input type="text" id="money" placeholder="mmk" />
+        <input type="text" id="currentrate" placeholder="exchangerate" />
+      </div>
+
+      <div class="btn">
+        <button
+          id="calc"
+          class="btn d-block w-100 btn-primary text-white rounded-5"
+        >
+          mmktocurrency
+        </button>
+        <button
+          id="recalc"
+          class="btn d-block w-100 btn-primary text-white rounded-5"
+        >
+          currencytommk
+        </button>
+      </div>
+
+      <div class="mb"><span>Result : </span> <span id="result"></span></div>
+
+      <div class="footer">
+        <button
+          id="clear"
+          class="btn d-block w-100 btn-primary text-white rounded-5"
+        >
+          clear
+        </button>
+        <button
+          id="store"
+          class="btn d-block w-100 btn-primary text-white rounded"
+        >
+          store
+        </button>
+      </div>
+
+      <div class="ul">
+        <span>Exchange-lists</span>
+        <ul id="results"></ul>
+      </div>
+    </div>
+
+    <script>
+      const money = document.getElementById("money");
+      const currentrate = document.getElementById("currentrate");
+      const calc = document.getElementById("calc");
+      const recalc = document.getElementById("recalc");
+      const resultElement = document.getElementById("result");
+      const clear = document.getElementById("clear");
+      const store = document.getElementById("store");
+      const results = document.getElementById("results");
+
+      calc.onclick = () => {
+        const result = money.value / currentrate.value + "currency";
+        resultElement.innerHTML = `${money.value} / ${currentrate.value} = ${result}`;
+        money.value = currentrate.value = null;
+      };
+
+      recalc.onclick = () => {
+        const result = money.value * currentrate.value + "mmk";
+        resultElement.innerHTML = `${money.value} * ${currentrate.value} = ${result}`;
+        money.value = currentrate.value = null;
+      };
+
+      clear.onclick = () => {
+        resultElement.innerText = null;
+      };
+      store.onclick = () => {
+        results.innerHTML += `<li>${resultElement.innerText}</li>`;
+        resultElement.innerText = null;
+      };
+    </script>
+  </body>
+</html>
